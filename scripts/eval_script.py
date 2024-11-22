@@ -1,5 +1,5 @@
 import json
-import faiss_database
+import faiss
 from langchain_community.docstore.in_memory import InMemoryDocstore
 from langchain_community.vectorstores import FAISS
 from langchain_core.documents import Document
@@ -121,7 +121,7 @@ base_model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2", devic
 
 test_df = pd.read_parquet('test-00000-of-00001.parquet')
 
-index = faiss_database.IndexFlatIP(384)
+index = faiss.IndexFlatIP(384)
 # index_gpu = faiss.index_cpu_to_all_gpus(index)
 
 def embedding_function(text):
@@ -176,13 +176,13 @@ if batch_documents:
   
 import pickle
 
-faiss_database.write_index(index, "finetune_llamindex_v3_faiss_index.bin")
+faiss.write_index(index, "finetune_llamindex_v3_faiss_index.bin")
 with open("finetune_llamindex_v3_docstore_metadata.pkl", "wb") as f:
     pickle.dump(index_to_docstore_id, f)
 
 
 
-loaded_index = faiss_database.read_index("finetune_llamindex_v3_faiss_index.bin")
+loaded_index = faiss.read_index("finetune_llamindex_v3_faiss_index.bin")
 
 with open("finetune_llamindex_v3_docstore_metadata.pkl", "rb") as f:
     loaded_metadata = pickle.load(f)

@@ -1,8 +1,7 @@
 import json
-import faiss_database
+import faiss
 from langchain_community.docstore.in_memory import InMemoryDocstore
 from langchain_community.vectorstores import FAISS
-from langchain_core.documents import Document
 from sentence_transformers import SentenceTransformer
 import torch
 import pandas as pd
@@ -62,7 +61,7 @@ for query_type in NUM_EXAMPLES.keys():
 
     test_df = pd.read_parquet('test-00000-of-00001.parquet')
 
-    index = faiss_database.IndexFlatIP(384)
+    index = faiss.IndexFlatIP(384)
 
 
     def embedding_function(text):
@@ -79,7 +78,7 @@ for query_type in NUM_EXAMPLES.keys():
         index_to_docstore_id={},
     )
 
-    loaded_index = faiss_database.read_index(f"finetune_llamaindex_faiss_index_{query_type}.bin")
+    loaded_index = faiss.read_index(f"finetune_llamaindex_faiss_index_{query_type}.bin")
 
     with open(f"finetune_llamaindex_v3_docstore_metadata_{query_type}.pkl", "rb") as f:
         loaded_metadata = pickle.load(f)
