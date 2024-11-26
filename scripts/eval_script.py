@@ -242,7 +242,6 @@ for key in results.keys():
         fin_results[key][k] = sum(results[key][k])/len(results[key][k])
         
 print(fin_results)
-fin_results = pd.DataFrame(fin_results)
 
 if verbose:
     

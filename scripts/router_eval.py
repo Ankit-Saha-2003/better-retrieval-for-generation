@@ -42,7 +42,7 @@ class Router(nn.Module):
     
 router = Router()
 
-state_dict = torch.load('chks/router/router_model_v2.pth', map_location=device)
+state_dict = torch.load('chks/router/router_model_v3.pth', map_location=device)
 router.load_state_dict(state_dict)
 
 if verbose:

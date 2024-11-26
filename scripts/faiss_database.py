@@ -8,9 +8,11 @@ import torch
 import pandas as pd
 import numpy as np
 from llama_index.embeddings.adapter.utils import TwoLayerNN
-from llama_index.core.embeddings import resolve_embed_model
 from tqdm import tqdm
 import pickle
+
+verbose = True
+
 
 NUM_EXAMPLES = {
     'DESCRIPTION': 150000,
@@ -22,9 +24,10 @@ NUM_EXAMPLES = {
 
 for query_type in NUM_EXAMPLES.keys():
     
-    print(f'----------------------------------{query_type}----------------------------------')
-    print()
-    print("--------------------Load finetuned model------------------------")
+    if verbose:
+        
+        print(f'----------------------------------Load finetuned model - {query_type}----------------------------------')
+
     model_path = F"chks/llama_index/all-MiniLM-L6-v2-finetuned-TwoLayerNN-{query_type}"
     config_path = f"{model_path}/config.json"
     model_weights_path = f"{model_path}/pytorch_model.bin"
@@ -52,12 +55,10 @@ for query_type in NUM_EXAMPLES.keys():
     test_df = pd.read_parquet('test-00000-of-00001.parquet')
 
     index = faiss.IndexFlatIP(384)
-    # index_gpu = faiss.index_cpu_to_all_gpus(index)
+
 
     def embedding_function(text):
-        # inputs = tokenizer(text, return_tensors="pt")
-        # outputs = model(**inputs)
-        # return outputs.last_hidden_state.detach().numpy()[0, 0]
+        
         embeddings = base_model.encode(text)
         embeddings = adapter_model.forward(torch.tensor(embeddings, dtype = torch.float32, requires_grad=False)).detach()
         return embeddings / np.linalg.norm(embeddings)
@@ -76,7 +77,10 @@ for query_type in NUM_EXAMPLES.keys():
     document_counter = 0
     batch_documents = []
 
-    print("-----------------------------Starting making vector index---------------------------------")
+    if verbose:
+        
+        print(f"----------------------------- Starting making vector index - {query_type} ---------------------------------")
+        
     # Loop over passages using tqdm for progress tracking
     for passages in tqdm(test_df['passages']):
         
@@ -104,8 +108,14 @@ for query_type in NUM_EXAMPLES.keys():
     if batch_documents:
         vector_store.add_documents(documents=batch_documents)
     
-    
-    print(f'-------------------Saving vector index {query_type}-----------------------------------')
+    if verbose:
+        
+        print(f'------------------- Saving vector index - {query_type} -----------------------------------')
+        
     faiss.write_index(index, f"finetune_llamaindex_faiss_index_{query_type}.bin")
-    with open(f"finetune_llamaindex_v3_docstore_metadata_{query_type}.pkl", "wb") as f:
+    with open(f"finetune_llamaindex_docstore_metadata_{query_type}.pkl", "wb") as f:
         pickle.dump(index_to_docstore_id, f)
+    
+    if verbose:
+        
+        print(f'----------------------- Vector index saved! - {query_type} -----------------------')

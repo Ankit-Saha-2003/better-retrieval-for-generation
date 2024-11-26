@@ -35,34 +35,13 @@ NUM_EXAMPLES = {
 for query_type in NUM_EXAMPLES.keys():
     
     if verbose:
-        
+
         if set_rerank:
             
-            print("-------------------------- Reranked ------------------------------")
+            print("--------------------------Reranked------------------------------")
             
-        print(f"------------------------------ Load finetuned model - {query_type} --------------------------------")
-                
-    model_path = f"chks/llama_index/all-MiniLM-L6-v2-finetuned-TwoLayerNN-{query_type}"
-    config_path = f"{model_path}/config.json"
-    model_weights_path = f"{model_path}/pytorch_model.bin"
-
-    # Load the config
-    with open(config_path, "r") as f:
-        config = json.load(f)
-
-    # Reconstruct the TwoLayerNN adapter model
-    adapter_model = TwoLayerNN(
-        in_features=config["in_features"],
-        hidden_features=config["hidden_features"],
-        out_features=config["out_features"],
-        bias=config["bias"],
-        activation_fn_str=config["activation_fn_str"],
-        add_residual=config["add_residual"]
-    )
-
-    # Load the adapter model's weights
-    adapter_model.load_state_dict(torch.load(model_weights_path,  map_location=torch.device(device)))
-
+        print(f"------------------------------ {query_type} --------------------------------")
+    
     # Load the base SentenceTransformer model
     base_model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2", device = device)
 
@@ -77,7 +56,6 @@ for query_type in NUM_EXAMPLES.keys():
     def embedding_function(text):
 
         embeddings = base_model.encode(text)
-        embeddings = adapter_model.forward(torch.tensor(embeddings, dtype = torch.float32, requires_grad=False)).detach()
         return embeddings / np.linalg.norm(embeddings)
 
 
@@ -88,15 +66,15 @@ for query_type in NUM_EXAMPLES.keys():
         index_to_docstore_id={},
     )
 
-    loaded_index = faiss.read_index(f"finetune_llamaindex_faiss_index_{query_type}.bin")
+    loaded_index = faiss.read_index(f"test_faiss_index.bin")
 
-    with open(f"finetune_llamaindex_docstore_metadata_{query_type}.pkl", "rb") as f:
+    with open(f"test_docstore_metadata.pkl", "rb") as f:
         loaded_metadata = pickle.load(f)
 
         
     if verbose:  
         
-        print(f"------------------ Evaluating metrics - {query_type} -----------------------")
+        print(f"------------------ Evaluating baseline metrics - {query_type} -----------------------")
 
     reranker_model = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2", default_activation_function=torch.nn.Sigmoid())
 
@@ -125,11 +103,12 @@ for query_type in NUM_EXAMPLES.keys():
     for i in tqdm(indices):
 
         query_text = test_df['query'][i]
-        query_embedding = embedding_function(query_text).numpy().astype('float32').reshape(1, -1)
+        query_embedding = embedding_function(query_text).reshape(1, -1)
         distances, indices = loaded_index.search(query_embedding, K_list[-1])
         retrieved_passages = [loaded_metadata[j] for j in indices[0]] 
         
         if set_rerank:
+            
             retrieved_passages = rerank(query_text, retrieved_passages)
 
         for K in K_list:
@@ -140,19 +119,19 @@ for query_type in NUM_EXAMPLES.keys():
 
     if set_rerank:
         
-        with open(f'metrics_5000_finetuned_llama-index_{query_type}_reranked.pkl', 'wb') as f:
+        with open(f'metrics_5000_baseline_{query_type}_reranked.pkl', 'wb') as f:
             pickle.dump(metrics, f)
             
-        with open(f'metrics_5000_finetuned_llama-index_{query_type}_reranked.pkl', 'rb') as f:
+        with open(f'metrics_5000_baseline_{query_type}_reranked.pkl', 'rb') as f:
             
             results = pickle.load(f)
 
     else:
         
-        with open(f'metrics_5000_finetuned_llama-index_{query_type}.pkl', 'wb') as f:
+        with open(f'metrics_5000_baseline_{query_type}.pkl', 'wb') as f:
             pickle.dump(metrics, f)
             
-        with open(f'metrics_5000_finetuned_llama-index_{query_type}.pkl', 'rb') as f:
+        with open(f'metrics_5000_baseline_{query_type}.pkl', 'rb') as f:
             
             results = pickle.load(f) 
             
@@ -171,4 +150,4 @@ for query_type in NUM_EXAMPLES.keys():
 
     if verbose:
         
-        print(f"-----------------------------Metrics evaluated - {query_type} !---------------------------------")
+        print(f"-----------------------------Baseline Metrics evaluated - {query_type} !---------------------------------")

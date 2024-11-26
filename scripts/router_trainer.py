@@ -94,7 +94,7 @@ class Router(nn.Module):
 router_model = Router().to(device)
 
   
-max_epochs = 70
+max_epochs = 120
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(router_model.parameters(), lr = 1e-4)
 
@@ -131,6 +131,6 @@ if verbose:
     
     print("---------------------------------Router trained!--------------------------\n")
  
-
-torch.save(router_model.state_dict(), 'chks/router/router_model_v2.pth')   
+# Save trained router
+torch.save(router_model.state_dict(), 'chks/router/router_model_v3.pth')   
    
