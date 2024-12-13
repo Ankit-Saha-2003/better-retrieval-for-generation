@@ -43,7 +43,7 @@ Retrieving additional contents from a collection for a given context, and using 
 
 - Mixture of experts:
 
-    - Ensemble of [2-LayerNN adapter](https://docs.llamaindex.ai/en/stable/examples/finetuning/embeddings/finetune_embedding_adapter/) finetuned retirevers
+    - Ensemble of [2-LayerNN adapter](https://docs.llamaindex.ai/en/stable/examples/finetuning/embeddings/finetune_embedding_adapter/) finetuned retrievers
     - Query passed to the Router
     - Router forwards query to the best expert (Here 5 experts, each expert corresponds to a query type)
     - Passages are retrieved by the best expert, with the option to combine results from multiple experts as per the user's preference.
@@ -66,12 +66,12 @@ Retrieving additional contents from a collection for a given context, and using 
 
 ## Results
 
-- Router classification accuracy:
+- **Router classification accuracy**:
     - hidden_dim = **128**, accuracy = **0.8837**
     - hidden_dim = **256**, accuracy = **0.8928**
 
 
-- Baseline metrics:
+- **Baseline metrics**:
 
 | k | Contextual Precision | Contextual Recall | Contextual Relevancy| 
 |----------|----------|----------|----------|
@@ -81,7 +81,7 @@ Retrieving additional contents from a collection for a given context, and using 
 | 100 | 0.507 | 0.683 | 0.068 |
 
 
-- Baseline + Reranker metrics:
+- **Baseline + Reranker metrics**:
 
 | k | Contextual Precision | Contextual Recall | Contextual Relevancy| 
 |----------|----------|----------|----------|
@@ -91,7 +91,7 @@ Retrieving additional contents from a collection for a given context, and using 
 | 100 | 0.576 | 0.683 | 0.068 |
 
 
-- Mixture of experts:
+- **Mixture of experts**:
 
 | k | Contextual Precision | Contextual Recall | Contextual Relevancy| 
 |----------|----------|----------|----------|
@@ -100,7 +100,7 @@ Retrieving additional contents from a collection for a given context, and using 
 | 7 | 0.665 | 0.390 | 0.388 |
 | 100 | 0.511 | 0.693 | 0.069 |
 
-- Mixture of experts + Reranker: 
+- **Mixture of experts + Reranker**: 
 
 | k | Contextual Precision | Contextual Recall | Contextual Relevancy| 
 |----------|----------|----------|----------|
@@ -109,10 +109,22 @@ Retrieving additional contents from a collection for a given context, and using 
 | 7 | 0.705 | 0.427 | 0.425 |
 | 100 | 0.574 | 0.693 | 0.070 |
 
-## Plot
+## Plots
 
 ![Contextual Precision](images/mixture-precision.png)
 ![Contextual Recall](images/mixture-recall.png)
 ![Contextual Relevancy](images/mixture-relevancy.png)
+
+## References
+
+- [MS MARCO Question Answering dataset (v2.1)](https://huggingface.co/datasets/microsoft/ms_marco)
+- [sentence-transformers/all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2)
+- [cross-encoder/ms-marco-MiniLM-L-6-v2](https://huggingface.co/cross-encoder/ms-marco-MiniLM-L-6-v2)
+- [Cross Encoder](https://sbert.net/examples/applications/cross-encoder/README.html)
+- [Mixtral - Mixture of experts](https://arxiv.org/abs/2401.04088)
+- [2-LayerNN adapter finetuning](https://docs.llamaindex.ai/en/stable/examples/finetuning/embeddings/finetune_embedding_adapter/)
+- [Contextual Precision](https://docs.confident-ai.com/docs/metrics-contextual-precision)
+- [Contextual Recall](https://docs.confident-ai.com/docs/metrics-contextual-recall)
+- [Contextual Relevancy](https://docs.confident-ai.com/docs/metrics-contextual-relevancy)
 
  
