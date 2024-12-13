@@ -118,6 +118,7 @@ Retrieving additional contents from a collection for a given context, and using 
 ## References
 
 - [MS MARCO Question Answering dataset (v2.1)](https://huggingface.co/datasets/microsoft/ms_marco)
+- [FAISS](https://python.langchain.com/docs/integrations/vectorstores/faiss/)
 - [sentence-transformers/all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2)
 - [cross-encoder/ms-marco-MiniLM-L-6-v2](https://huggingface.co/cross-encoder/ms-marco-MiniLM-L-6-v2)
 - [Cross Encoder](https://sbert.net/examples/applications/cross-encoder/README.html)
