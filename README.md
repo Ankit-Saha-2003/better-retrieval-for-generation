@@ -121,7 +121,7 @@ Retrieving additional contents from a collection for a given context, and using 
 - [FAISS](https://python.langchain.com/docs/integrations/vectorstores/faiss/)
 - [sentence-transformers/all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2)
 - [cross-encoder/ms-marco-MiniLM-L-6-v2](https://huggingface.co/cross-encoder/ms-marco-MiniLM-L-6-v2)
-- [Cross Encoder](https://sbert.net/examples/applications/cross-encoder/README.html)
+- [Usage of Cross Encoders](https://sbert.net/examples/applications/cross-encoder/README.html)
 - [Mixtral - Mixture of experts](https://arxiv.org/abs/2401.04088)
 - [2-LayerNN adapter finetuning](https://docs.llamaindex.ai/en/stable/examples/finetuning/embeddings/finetune_embedding_adapter/)
 - [Contextual Precision](https://docs.confident-ai.com/docs/metrics-contextual-precision)
