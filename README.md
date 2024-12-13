@@ -109,10 +109,10 @@ Retrieving additional contents from a collection for a given context, and using 
 | 7 | 0.705 | 0.427 | 0.425 |
 | 100 | 0.574 | 0.693 | 0.070 |
 
-## Plot 
+## Plot
 
-- ![Contextual Precision](images/mixture-precision.png)
-- ![Contextual Recall](images/mixture-recall.png)
-- ![Contextual Relevancy](images/mixture-relevancy.png)
+![Contextual Precision](images/mixture-precision.png)
+![Contextual Recall](images/mixture-recall.png)
+![Contextual Relevancy](images/mixture-relevancy.png)
 
  
