@@ -1,1 +1,8 @@
-
+- **Mixture_of_experts.py**: Adapter finetunes the experts
+- **eval_baseline_query_type.py**: Evaluates baseline over examples of each query type
+- **eval_experts.py**: Evaluates each expert over examples of their query type
+- **eval_mixture_of_experts.py**: Evaluates the mixture of experts pipeline
+- **faiss_database.py**: Creates and stores faiss vector databases for each expert
+- **metrics.py**: Evaluation metrics for retriever
+- **router_trainer**: Trains and saves the router
+- **router_eval**: Evaluates the router
