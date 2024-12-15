@@ -73,8 +73,8 @@ Retrieving additional contents from a collection for a given context, and using 
 
 - **Baseline metrics**:
 
-| k | Contextual Precision | Contextual Recall | Contextual Relevancy| 
-|----------|----------|----------|----------|
+| $k$ | Contextual Precision | Contextual Recall | Contextual Relevancy| 
+|:----------:|----------|----------|----------|
 | 3 | 0.707 | 0.171 | 0.570 |
 | 5 | 0.698 | 0.254 | 0.507 |
 | 7 | 0.659 | 0.382 | 0.381 |
@@ -83,8 +83,8 @@ Retrieving additional contents from a collection for a given context, and using 
 
 - **Baseline + Reranker metrics**:
 
-| k | Contextual Precision | Contextual Recall | Contextual Relevancy| 
-|----------|----------|----------|----------|
+| $k$ | Contextual Precision | Contextual Recall | Contextual Relevancy| 
+|:----------:|----------|----------|----------|
 | 3 | 0.756 | 0.186 | 0.620 |
 | 5 | 0.745 | 0.280 | 0.558 |
 | 7 | 0.704 | 0.425 | 0.423 |
@@ -93,8 +93,8 @@ Retrieving additional contents from a collection for a given context, and using 
 
 - **Mixture of experts**:
 
-| k | Contextual Precision | Contextual Recall | Contextual Relevancy| 
-|----------|----------|----------|----------|
+| $k$ | Contextual Precision | Contextual Recall | Contextual Relevancy| 
+|:----------:|----------|----------|----------|
 | 3 | 0.713 | 0.173 | 0.579 |
 | 5 | 0.704 | 0.258 | 0.515 |
 | 7 | 0.665 | 0.390 | 0.388 |
@@ -102,8 +102,8 @@ Retrieving additional contents from a collection for a given context, and using 
 
 - **Mixture of experts + Reranker**: 
 
-| k | Contextual Precision | Contextual Recall | Contextual Relevancy| 
-|----------|----------|----------|----------|
+| $k$ | Contextual Precision | Contextual Recall | Contextual Relevancy| 
+|:----------:|----------|----------|----------|
 | 3 | 0.758 | 0.187 | 0.621 |
 | 5 | 0.747 | 0.281 | 0.560 |
 | 7 | 0.705 | 0.427 | 0.425 |
@@ -117,15 +117,16 @@ Retrieving additional contents from a collection for a given context, and using 
 
 ## References
 
-- [MS MARCO Question Answering dataset (v2.1)](https://huggingface.co/datasets/microsoft/ms_marco)
-- [FAISS](https://python.langchain.com/docs/integrations/vectorstores/faiss/)
-- [sentence-transformers/all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2)
-- [cross-encoder/ms-marco-MiniLM-L-6-v2](https://huggingface.co/cross-encoder/ms-marco-MiniLM-L-6-v2)
-- [Usage of Cross Encoders](https://sbert.net/examples/applications/cross-encoder/README.html)
-- [Mixtral - Mixture of experts](https://arxiv.org/abs/2401.04088)
-- [2-LayerNN adapter finetuning](https://docs.llamaindex.ai/en/stable/examples/finetuning/embeddings/finetune_embedding_adapter/)
-- [Contextual Precision](https://docs.confident-ai.com/docs/metrics-contextual-precision)
-- [Contextual Recall](https://docs.confident-ai.com/docs/metrics-contextual-recall)
-- [Contextual Relevancy](https://docs.confident-ai.com/docs/metrics-contextual-relevancy)
+1. [Campos, D.F., Nguyen, T., Rosenberg, M., Song, X., Gao, J., Tiwary, S., Majumder, R., Deng, L., & Mitra, B. (2016). MS MARCO: A Human Generated MAchine Reading COmprehension Dataset. ArXiv, abs/1611.09268.](https://arxiv.org/abs/1611.09268)
+2. [Jiang, A.Q., Sablayrolles, A., Roux, A., Mensch, A., Savary, B., Bamford, C., Chaplot, D.S., Casas, D.D., Hanna, E.B., Bressand, F., Lengyel, G., Bour, G., Lample, G., Lavaud, L.R., Saulnier, L., Lachaux, M., Stock, P., Subramanian, S., Yang, S., Antoniak, S., Scao, T.L., Gervet, T., Lavril, T., Wang, T., Lacroix, T., & Sayed, W.E. (2024). Mixtral of Experts. ArXiv, abs/2401.04088.](https://arxiv.org/abs/2401.04088)
+3. [MS MARCO Question Answering dataset (v2.1)](https://huggingface.co/datasets/microsoft/ms_marco)
+4. [FAISS](https://python.langchain.com/docs/integrations/vectorstores/faiss/)
+5. [sentence-transformers/all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2)
+6. [cross-encoder/ms-marco-MiniLM-L-6-v2](https://huggingface.co/cross-encoder/ms-marco-MiniLM-L-6-v2)
+7. [Usage of Cross Encoders](https://sbert.net/examples/applications/cross-encoder/README.html)
+8. [2-LayerNN adapter finetuning](https://docs.llamaindex.ai/en/stable/examples/finetuning/embeddings/finetune_embedding_adapter/)
+9. [Contextual Precision](https://docs.confident-ai.com/docs/metrics-contextual-precision)
+10. [Contextual Recall](https://docs.confident-ai.com/docs/metrics-contextual-recall)
+11. [Contextual Relevancy](https://docs.confident-ai.com/docs/metrics-contextual-relevancy)
 
  
